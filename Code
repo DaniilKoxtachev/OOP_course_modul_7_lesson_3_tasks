@@ -1,0 +1,38 @@
+#include <iostream> 
+#include <vector>
+
+using namespace std;
+
+class Student{
+public:
+    Student(string n, int y): name(n), year(y) {}
+
+    friend std::ostream& operator<< (std::ostream& out, const Student* student);
+private:
+    string name;
+    int year;
+};
+
+std::ostream& operator<< (std::ostream& out, const Student* student) {
+    out << "Student(" << student->name << ", " << student->year << ")";
+    return out;
+}
+
+int main() {
+    setlocale(LC_ALL, "rus");
+    vector<Student*> students;
+    students.push_back(new Student("Иван Иванов Иванович", 2015));
+    students.push_back(new Student("Антонов Михаил Антонович", 2017));
+    students.push_back(new Student("Исаева Мария Сергеевна", 2020));
+    students.push_back(new Student("Котлова Галина Михайловна", 2020));
+    students.push_back(new Student("Меняев Дмитрий Иванович", 2021));
+    students.push_back(new Student("Беляева Александра Сергеевна", 2020));
+    students.push_back(new Student("Капитанов Даниил Александрович", 2018));
+    students.push_back(new Student("Данская Елизавета Юрьевна", 2019));
+
+    for (auto i = students.begin(); i != students.end(); ++i)
+    {
+        cout << *i << endl;
+    }
+    return 0;
+}
